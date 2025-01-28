@@ -1,4 +1,4 @@
-import { AppSidebar } from "../app-sidebar";
+import { AppSidebar } from "./app-sidebar";
 import { SidebarInset, SidebarProvider } from "../ui/sidebar";
 import React from "react";
 import Header from "../Header/Header";

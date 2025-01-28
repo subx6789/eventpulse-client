@@ -12,7 +12,7 @@ type StatsCardProps = {
 const StatsCard = ({ title, icon: Icon, currency, amount }: StatsCardProps) => {
   return (
     <Card className="w-full rounded-lg shadow-sm border border-gray-200">
-      <CardContent className="flex items-center gap-4 p-5">
+      <CardContent className="flex items-center gap-4 p-8">
         <div className="bg-gray-100 p-3 rounded-md">
           <Icon className="text-gray-700" size={20} />
         </div>
