@@ -7,6 +7,7 @@ import {
   Settings2,
   TicketCheck,
   Users,
+  LucideIcon,
 } from "lucide-react";
 
 import { NavMain } from "@/components/Sidebar/nav-main";
@@ -22,34 +23,37 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 
+// Define valid roles
+type Role = "Admin" | "Organiser";
+
+// Define role-based icons explicitly as LucideIcon
+const roleIcons: Record<Role, Record<string, LucideIcon>> = {
+  Admin: {
+    Overview: LayoutDashboard,
+    "Event Requests": CalendarDays,
+    Organisers: Users,
+    Settings: Settings2,
+  },
+  Organiser: {
+    Dashboard: LayoutDashboard,
+    "My Events": TicketCheck,
+    Settings: Settings2,
+  },
+};
+
+// Mock user data
 const data = {
   user: {
     name: "Techno India University",
     email: "tiu@technoindiauniversity.com",
-    role: "Admin",
+    role: "Admin", // Ensure the role matches the defined type
     avatar: "/avatars/shadcn.jpg",
   },
   navMain: [
-    {
-      title: "Overview",
-      url: "/admin/dashboard/overview",
-      icon: LayoutDashboard,
-    },
-    {
-      title: "Event Requests",
-      url: "/admin/dashboard/event-requests",
-      icon: CalendarDays,
-    },
-    {
-      title: "Organisers",
-      url: "/admin/dashboard/organisers",
-      icon: Users,
-    },
-    {
-      title: "Settings",
-      url: "/admin/dashboard/settings",
-      icon: Settings2,
-    },
+    { title: "Overview", url: "/admin/dashboard/overview" },
+    { title: "Event Requests", url: "/admin/dashboard/event-requests" },
+    { title: "Organisers", url: "/admin/dashboard/organisers" },
+    { title: "Settings", url: "/admin/dashboard/settings" },
   ],
 };
 
@@ -78,7 +82,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain
+          items={data.navMain.map((item) => ({
+            ...item,
+            icon:
+              roleIcons[data.user.role as Role]?.[item.title] ||
+              LayoutDashboard, // Default icon
+          }))}
+        />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
