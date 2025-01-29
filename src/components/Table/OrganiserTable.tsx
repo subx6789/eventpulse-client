@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 
 export interface Organizer {
   id: string;
@@ -66,15 +66,7 @@ export default function OrganizerTable({ organizers }: OrganizerTableProps) {
             </TableCell>
             <TableCell className="w-[100px]">{organizer.eventCount}</TableCell>
             <TableCell className="w-[100px] text-right">
-              <div className="flex justify-end gap-2">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8"
-                  onClick={() => console.log("Edit:", organizer.id)}
-                >
-                  <Pencil className="h-4 w-4" />
-                </Button>
+              <div className="flex justify-end">
                 <Button
                   variant="ghost"
                   size="icon"
