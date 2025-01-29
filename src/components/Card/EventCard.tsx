@@ -1,3 +1,4 @@
+"use client";
 import {
   Card,
   CardContent,
@@ -14,10 +15,18 @@ interface EventCardProps {
 }
 
 const EventCard = ({ event }: EventCardProps) => {
+  const handleApprove = (id: string) => {
+    console.log(`Approved Event with ID: ${id}`);
+  };
+
+  const handleDeny = (id: string) => {
+    console.log(`Denied Event with ID: ${id}`);
+  };
+
   return (
-    <Card className="overflow-hidden rounded-2xl shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl">
+    <Card className="flex flex-col overflow-hidden rounded-2xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-white max-w-md mx-auto md:max-w-lg lg:max-w-xl h-full">
       {/* Image Section */}
-      <div className="relative h-48 w-full md:h-56">
+      <div className="relative h-52 w-full md:h-60 lg:h-64">
         <Image
           src={event.image}
           alt={event.title}
@@ -26,45 +35,54 @@ const EventCard = ({ event }: EventCardProps) => {
           priority
         />
         <div className="absolute top-4 left-4">
-          <span className="rounded-full bg-white/90 px-3 py-1 text-sm font-medium shadow-sm">
+          <span className="rounded-full bg-white/80 px-3 py-1 text-sm font-semibold shadow-md backdrop-blur-md">
             {event.category}
           </span>
         </div>
       </div>
 
       {/* Card Header */}
-      <CardHeader className="p-5">
-        <h3 className="text-lg font-bold md:text-xl">{event.title}</h3>
-        <p className="mt-1 text-sm text-gray-600 md:text-base">
+      <CardHeader className="p-6 flex flex-col flex-grow">
+        <h3 className="text-xl font-semibold text-gray-900 line-clamp-2 min-h-[48px]">
+          {event.title}
+        </h3>
+        <p className="mt-2 text-sm text-gray-700 line-clamp-3 min-h-[72px]">
           {event.description}
         </p>
       </CardHeader>
 
       {/* Card Content */}
-      <CardContent className="p-4 md:p-5">
-        <div className="flex items-center gap-2">
+      <CardContent className="px-5 flex flex-col gap-3 flex-grow">
+        <div className="flex items-center gap-2 text-gray-600">
           <CalendarIcon className="h-5 w-5 text-gray-500" />
-          <span className="text-sm md:text-base">
+          <span className="text-sm">
             {event.date} • {event.time}
           </span>
         </div>
-        <div className="mt-3 flex items-center gap-2">
+        <div className="flex items-center gap-2 text-gray-600">
           <MapPinIcon className="h-5 w-5 text-gray-500" />
-          <span className="text-sm md:text-base">{event.location}</span>
+          <span className="text-sm">{event.location}</span>
         </div>
       </CardContent>
 
-      <div className="flex w-full items-center justify-between px-5">
-        <span className="font-bold text-lg md:text-xl">Rs. {event.price}</span>
+      {/* Price Section */}
+      <div className="px-6 py-3 border-t border-gray-200 text-lg font-bold text-gray-900 flex justify-between items-center">
+        <span>Rs. {event.price}</span>
       </div>
 
       {/* Card Footer */}
-      <CardFooter className="p-4 md:p-6 flex flex-col gap-5 w-full">
+      <CardFooter className="p-6 flex flex-col gap-4 w-full mt-auto">
         <div className="flex w-full flex-col gap-3 sm:flex-row sm:justify-between">
-          <Button className="bg-green-500 text-white px-5 py-2 text-sm md:text-base hover:scale-105 transition-all duration-150 w-full sm:w-auto">
+          <Button
+            className="bg-green-500 text-white px-5 py-2 text-sm font-medium rounded-lg hover:bg-green-600 transition-all duration-200 w-full sm:w-auto"
+            onClick={() => handleApprove(event.id)}
+          >
             Approve
           </Button>
-          <Button className="bg-red-500 text-white px-5 py-2 text-sm md:text-base hover:scale-105 transition-all duration-150 w-full sm:w-auto">
+          <Button
+            className="bg-red-500 text-white px-5 py-2 text-sm font-medium rounded-lg hover:bg-red-600 transition-all duration-200 w-full sm:w-auto"
+            onClick={() => handleDeny(event.id)}
+          >
             Deny
           </Button>
         </div>

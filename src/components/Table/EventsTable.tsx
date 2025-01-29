@@ -11,18 +11,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import Image from "next/image";
-
-interface Event {
-  id: string;
-  name: string;
-  organizer: string;
-  date: string;
-  category: string;
-  ticketsSold: string;
-  revenue: number;
-  status: string;
-  image: string;
-}
+import { EventTable } from "@/types/eventTable";
 
 interface TabProps {
   label: string;
@@ -43,184 +32,20 @@ const Tab: React.FC<TabProps> = ({ label, active, onClick }) => (
   </button>
 );
 
-const EventsTable = () => {
+type TableProps = {
+  currentEvents: EventTable[];
+  pastEvents: EventTable[];
+  upcomingEvents: EventTable[];
+};
+
+const EventsTable = ({
+  currentEvents,
+  pastEvents,
+  upcomingEvents,
+}: TableProps) => {
   const [activeTab, setActiveTab] = useState("current");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
-
-  const currentEvents: Event[] = [
-    {
-      id: "1",
-      name: "Tech Summit 2024",
-      organizer: "GDSC",
-      date: "Mar 15, 2024",
-      category: "Educational",
-      ticketsSold: "450/500",
-      revenue: 22500,
-      status: "Active",
-      image: "/tech-summit.jpg",
-    },
-    {
-      id: "2",
-      name: "Music Festival",
-      organizer: "Sanskaran",
-      date: "Mar 20, 2024",
-      category: "Fun",
-      ticketsSold: "2800/3000",
-      revenue: 84000,
-      status: "Active",
-      image: "/music-fest.jpg",
-    },
-    {
-      id: "3",
-      name: "Gaming Workshop",
-      organizer: "GamersHub",
-      date: "Mar 25, 2024",
-      category: "Gaming",
-      ticketsSold: "180/200",
-      revenue: 9000,
-      status: "Active",
-      image: "/gaming.jpg",
-    },
-    {
-      id: "4",
-      name: "AI Conference",
-      organizer: "TechCorp",
-      date: "Mar 28, 2024",
-      category: "Educational",
-      ticketsSold: "290/300",
-      revenue: 29000,
-      status: "Active",
-      image: "/ai-conf.jpg",
-    },
-    {
-      id: "5",
-      name: "Art Exhibition",
-      organizer: "ArtSpace",
-      date: "Mar 30, 2024",
-      category: "Fun",
-      ticketsSold: "150/200",
-      revenue: 7500,
-      status: "Active",
-      image: "/art-expo.jpg",
-    },
-  ];
-
-  const upcomingEvents: Event[] = [
-    {
-      id: "1",
-      name: "Startup Pitch",
-      organizer: "VentureX",
-      date: "Apr 15, 2024",
-      category: "Business",
-      ticketsSold: "80/200",
-      revenue: 4000,
-      status: "Scheduled",
-      image: "/pitch.jpg",
-    },
-    {
-      id: "2",
-      name: "Summer Concert",
-      organizer: "MusicLife",
-      date: "Apr 20, 2024",
-      category: "Fun",
-      ticketsSold: "1500/2000",
-      revenue: 75000,
-      status: "Scheduled",
-      image: "/concert.jpg",
-    },
-    {
-      id: "3",
-      name: "Code Camp",
-      organizer: "DevHub",
-      date: "Apr 25, 2024",
-      category: "Educational",
-      ticketsSold: "220/300",
-      revenue: 11000,
-      status: "Scheduled",
-      image: "/code-camp.jpg",
-    },
-    {
-      id: "4",
-      name: "Food Festival",
-      organizer: "FoodieClub",
-      date: "May 1, 2024",
-      category: "Fun",
-      ticketsSold: "400/500",
-      revenue: 20000,
-      status: "Scheduled",
-      image: "/food-fest.jpg",
-    },
-    {
-      id: "5",
-      name: "Design Workshop",
-      organizer: "CreativeMinds",
-      date: "May 5, 2024",
-      category: "Educational",
-      ticketsSold: "90/100",
-      revenue: 9000,
-      status: "Scheduled",
-      image: "/design.jpg",
-    },
-  ];
-
-  const pastEvents: Event[] = [
-    {
-      id: "1",
-      name: "Winter Festival",
-      organizer: "CityEvents",
-      date: "Jan 15, 2024",
-      category: "Fun",
-      ticketsSold: "4800/5000",
-      revenue: 240000,
-      status: "Completed",
-      image: "/winter-fest.jpg",
-    },
-    {
-      id: "2",
-      name: "Data Science Summit",
-      organizer: "DataCorp",
-      date: "Feb 1, 2024",
-      category: "Educational",
-      ticketsSold: "280/300",
-      revenue: 14000,
-      status: "Completed",
-      image: "/data-science.jpg",
-    },
-    {
-      id: "3",
-      name: "Esports Tournament",
-      organizer: "GameLeague",
-      date: "Feb 15, 2024",
-      category: "Gaming",
-      ticketsSold: "950/1000",
-      revenue: 47500,
-      status: "Completed",
-      image: "/esports.jpg",
-    },
-    {
-      id: "4",
-      name: "Business Conference",
-      organizer: "BizNetwork",
-      date: "Feb 28, 2024",
-      category: "Business",
-      ticketsSold: "480/500",
-      revenue: 96000,
-      status: "Completed",
-      image: "/biz-conf.jpg",
-    },
-    {
-      id: "5",
-      name: "Photography Workshop",
-      organizer: "PhotoArt",
-      date: "Mar 1, 2024",
-      category: "Educational",
-      ticketsSold: "75/80",
-      revenue: 7500,
-      status: "Completed",
-      image: "/photo.jpg",
-    },
-  ];
 
   const getEventsForTab = () => {
     switch (activeTab) {
@@ -270,7 +95,7 @@ const EventsTable = () => {
     return colors[status as keyof typeof colors] || "";
   };
 
-  const EventTable = ({ events }: { events: Event[] }) => (
+  const EventTable = ({ events }: { events: EventTable[] }) => (
     <div className="w-full overflow-x-auto">
       <table className="w-full">
         <thead>
@@ -300,13 +125,13 @@ const EventsTable = () => {
             <tr key={event.id} className="border-b hover:bg-gray-50 text-sm">
               <td className="p-5">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+                  <div className="bg-gray-200 rounded-lg overflow-hidden w-10 h-10">
                     <Image
-                      src="/api/placeholder/40/40"
+                      src={event.image}
                       width={40}
                       height={40}
                       alt={event.name}
-                      className="object-cover"
+                      className="aspect-square object-cover"
                     />
                   </div>
                   <div className="min-w-[120px]">

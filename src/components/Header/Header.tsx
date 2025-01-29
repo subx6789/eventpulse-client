@@ -26,7 +26,7 @@ const Header = () => {
     <header className="flex h-16 items-center justify-between">
       <SidebarTrigger className="-ml-1" />
       <h1 className="text-lg font-semibold">{title}</h1>
-      <Button>
+      <Button className="hover:scale-105 transition-all duration-150">
         <Plus />
         Add Organiser
       </Button>

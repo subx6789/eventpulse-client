@@ -11,24 +11,13 @@ import {
   ResponsiveContainer,
   Area,
 } from "recharts";
+import { DataPoint } from "@/types/dataPoint";
 
-interface DataPoint {
-  month: string;
-  value: number;
-}
+type EngagementChartProps = {
+  data: DataPoint[];
+};
 
-const EngagementChart = () => {
-  // Sample data - this would come from your API later
-  const data: DataPoint[] = [
-    { month: "Jan", value: 15000 },
-    { month: "Feb", value: 25000 },
-    { month: "Mar", value: 35000 },
-    { month: "Apr", value: 45000 },
-    { month: "May", value: 55000 },
-    { month: "Jun", value: 65000 },
-    { month: "Jul", value: 75000 },
-  ];
-
+const EngagementChart = ({ data }: EngagementChartProps) => {
   // Custom tooltip component
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const CustomTooltip = ({ active, payload, label }: any) => {
