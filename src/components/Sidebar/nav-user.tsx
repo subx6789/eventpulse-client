@@ -70,13 +70,13 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => console.log("View Profile")}>
                 <BadgeCheck />
                 View Profile
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={() => console.log("Log out")}>
               <LogOut />
               Log out
             </DropdownMenuItem>
