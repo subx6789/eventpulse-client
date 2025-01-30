@@ -4,22 +4,22 @@ export const statCardData = [
   {
     title: "Total Revenue",
     icon: DollarSign,
-    currency: "$",
-    amount: 124563,
+    currency: "₹",
+    amount: 345090,
   },
   {
-    title: "Active Events",
+    title: "Events Completed",
     icon: CalendarDays,
-    amount: 45,
+    amount: 65,
   },
   {
     title: "Total Bookings",
     icon: Ticket,
-    amount: 1234,
+    amount: 3229,
   },
   {
     title: "Total Organisers",
     icon: Users,
-    amount: 69,
+    amount: 5,
   },
 ];

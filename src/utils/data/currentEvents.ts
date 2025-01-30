@@ -1,59 +1,86 @@
 import { EventTable } from "@/types/eventTable";
+import { getRandomImage } from "./imageUrls";
+
+function formatDate(date: number): string {
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  const d = new Date(date);
+  const month = months[d.getMonth()];
+  const day = d.getDate();
+  const year = d.getFullYear();
+
+  return `${month} ${day}, ${year}`;
+}
 
 export const currentEvents: EventTable[] = [
   {
     id: "1",
     name: "Tech Summit 2024",
     organizer: "GDSC",
-    date: "Mar 15, 2024",
+    date: formatDate(Date.now()),
     category: "Educational",
     ticketsSold: "450/500",
-    revenue: 22500,
+    revenue: 0,
     status: "Active",
-    image: "/Placeholder/event-placeholder.jpg",
+    image:
+      getRandomImage("Educational") || "/Placeholder/event-placeholder.jpg",
   },
   {
     id: "2",
     name: "Music Festival",
     organizer: "Sanskaran",
-    date: "Mar 20, 2024",
+    date: formatDate(Date.now()),
     category: "Fun",
-    ticketsSold: "2800/3000",
-    revenue: 84000,
+    ticketsSold: "280/300",
+    revenue: 52870,
     status: "Active",
-    image: "/Placeholder/event-placeholder.jpg",
+    image: getRandomImage("Fun") || "/Placeholder/event-placeholder.jpg",
   },
   {
     id: "3",
     name: "Gaming Workshop",
     organizer: "GamersHub",
-    date: "Mar 25, 2024",
+    date: formatDate(Date.now()),
     category: "Gaming",
     ticketsSold: "180/200",
-    revenue: 9000,
+    revenue: 0,
     status: "Active",
-    image: "/Placeholder/event-placeholder.jpg",
+    image: getRandomImage("Gaming") || "/Placeholder/event-placeholder.jpg",
   },
   {
     id: "4",
     name: "AI Conference",
     organizer: "TechCorp",
-    date: "Mar 28, 2024",
+    date: formatDate(Date.now()),
     category: "Educational",
     ticketsSold: "290/300",
-    revenue: 29000,
+    revenue: 7450,
     status: "Active",
-    image: "/Placeholder/event-placeholder.jpg",
+    image:
+      getRandomImage("Educational") || "/Placeholder/event-placeholder.jpg",
   },
   {
     id: "5",
     name: "Art Exhibition",
     organizer: "ArtSpace",
-    date: "Mar 30, 2024",
+    date: formatDate(Date.now()),
     category: "Fun",
     ticketsSold: "150/200",
-    revenue: 7500,
+    revenue: 7540,
     status: "Active",
-    image: "/Placeholder/event-placeholder.jpg",
+    image: getRandomImage("Fun") || "/Placeholder/event-placeholder.jpg",
   },
 ];

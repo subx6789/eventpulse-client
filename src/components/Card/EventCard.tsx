@@ -43,6 +43,9 @@ const EventCard = ({ event }: EventCardProps) => {
 
       {/* Card Header */}
       <CardHeader className="p-6 flex flex-col flex-grow">
+        <span className="px-3 py-2 bg-gray-200 rounded-md text-sm w-fit">
+          {event.organiser}
+        </span>
         <h3 className="text-xl font-semibold text-gray-900 line-clamp-2 min-h-[48px]">
           {event.title}
         </h3>
@@ -67,7 +70,7 @@ const EventCard = ({ event }: EventCardProps) => {
 
       {/* Price Section */}
       <div className="px-6 py-3 border-t border-gray-200 text-lg font-bold text-gray-900 flex justify-between items-center">
-        <span>Rs. {event.price}</span>
+        <span>{event.price === "Free" ? "Free" : "₹ " + event.price}</span>
       </div>
 
       {/* Card Footer */}

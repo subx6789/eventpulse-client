@@ -156,7 +156,9 @@ const EventsTable = ({
               </td>
               <td className="p-3 md:text-md text-sm">{event.ticketsSold}</td>
               <td className="p-3 md:text-md text-sm">
-                ${event.revenue.toLocaleString()}
+                {event.revenue.toLocaleString() === "0"
+                  ? "Free"
+                  : `₹ ${event.revenue.toLocaleString()}`}
               </td>
               <td className="p-3">
                 <Badge
