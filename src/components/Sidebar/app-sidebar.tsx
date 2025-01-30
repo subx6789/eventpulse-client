@@ -22,6 +22,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { sidebarDataAdmin } from "@/utils/data/sidebarDataAdmin";
 
 // Define valid roles
 type Role = "Admin" | "Organiser";
@@ -42,20 +43,6 @@ const roleIcons: Record<Role, Record<string, LucideIcon>> = {
 };
 
 // Mock user data
-const data = {
-  user: {
-    name: "Techno India University",
-    email: "tiu@gmail.com",
-    role: "Admin", // Ensure the role matches the defined type
-    avatar: "/avatars/shadcn.jpg",
-  },
-  navMain: [
-    { title: "Overview", url: "/admin/dashboard/overview" },
-    { title: "Event Requests", url: "/admin/dashboard/event-requests" },
-    { title: "Organisers", url: "/admin/dashboard/organisers" },
-    { title: "Settings", url: "/admin/dashboard/settings" },
-  ],
-};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -74,7 +61,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Eventpulse</span>
-                  <span className="truncate text-xs">{data.user.role}</span>
+                  <span className="truncate text-xs">
+                    {sidebarDataAdmin.user.role}
+                  </span>
                 </div>
               </Link>
             </SidebarMenuButton>
@@ -83,16 +72,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain
-          items={data.navMain.map((item) => ({
+          items={sidebarDataAdmin.navMain.map((item) => ({
             ...item,
             icon:
-              roleIcons[data.user.role as Role]?.[item.title] ||
+              roleIcons[sidebarDataAdmin.user.role as Role]?.[item.title] ||
               LayoutDashboard, // Default icon
           }))}
         />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={sidebarDataAdmin.user} />
       </SidebarFooter>
     </Sidebar>
   );
