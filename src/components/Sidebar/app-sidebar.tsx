@@ -45,7 +45,7 @@ const roleIcons: Record<Role, Record<string, LucideIcon>> = {
 const data = {
   user: {
     name: "Techno India University",
-    email: "tiu@technoindiauniversity.com",
+    email: "tiu@gmail.com",
     role: "Admin", // Ensure the role matches the defined type
     avatar: "/avatars/shadcn.jpg",
   },
